@@ -24,6 +24,10 @@ var Broadcast1 = Broadcast{
 	Name:       "all-queue",
 	QueueNames: []string{Queue1.Name, Queue2.Name},
 }
+var (
+	QUEUE_TIME_INTERVAL     = 100 * time.Millisecond
+	BROADCAST_TIME_INTERVAL = 300 * time.Millisecond
+)
 
 func TestGque(t *testing.T) {
 	var AppName = "gque-gque"
@@ -44,7 +48,7 @@ func TestGque(t *testing.T) {
 		Data: MessageType{"MessageFrom": "Queue", "index": 1},
 	}
 
-	for range time.Tick(1 * time.Second) {
+	for range time.Tick(QUEUE_TIME_INTERVAL) {
 		if someVar == 1 {
 			pushMessage.Name = Queue1.Name
 			someVar = 2
@@ -65,7 +69,7 @@ func StartQueue1(GqueClient *Client) {
 	queue1CreateResult, queue1CreateErr := GqueClient.CreateQueue(Queue1)
 	fmt.Printf("\n queue1CreateResult : %v \n queue1CreateErr: %v ", queue1CreateResult, queue1CreateErr)
 
-	receiveChan := make(chan MessageType)
+	receiveChan := make(chan MessageType, 10000)
 	go ConsumerTest(Queue1.Name, receiveChan)
 
 	consumer1Request := ConsumerRequestType{
@@ -82,7 +86,7 @@ func StartQueue2(GqueClient *Client) {
 	queue2CreateResult, queue2CreateErr := GqueClient.CreateQueue(Queue2)
 	fmt.Printf("\n queue2CreateResult : %v \n queue2CreateErr: %v ", queue2CreateResult, queue2CreateErr)
 
-	receiveChan2 := make(chan MessageType)
+	receiveChan2 := make(chan MessageType, 10000)
 
 	go ConsumerTest(Queue2.Name, receiveChan2)
 
@@ -108,7 +112,7 @@ func StartBroadcast(GqueClient *Client) {
 	}
 	time.Sleep(2 * time.Second)
 	index := 1
-	for range time.Tick(1 * time.Second) {
+	for range time.Tick(BROADCAST_TIME_INTERVAL) {
 		broadcastMessage.Data["index"] = index
 		GqueClient.BroadcastMessage(broadcastMessage)
 
