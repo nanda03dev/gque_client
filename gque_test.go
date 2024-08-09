@@ -25,8 +25,8 @@ var Broadcast1 = Broadcast{
 	QueueNames: []string{Queue1.Name, Queue2.Name},
 }
 var (
-	QUEUE_TIME_INTERVAL     = 100 * time.Millisecond
-	BROADCAST_TIME_INTERVAL = 300 * time.Millisecond
+	QUEUE_TIME_INTERVAL     = 50 * time.Millisecond
+	BROADCAST_TIME_INTERVAL = 100 * time.Second
 )
 
 func TestGque(t *testing.T) {
@@ -36,7 +36,7 @@ func TestGque(t *testing.T) {
 
 	StartQueue1(GqueClient)
 	StartQueue2(GqueClient)
-	go StartBroadcast(GqueClient)
+	// go StartBroadcast(GqueClient)
 
 	time.Sleep(2 * time.Second)
 
@@ -56,15 +56,14 @@ func TestGque(t *testing.T) {
 			pushMessage.Name = Queue2.Name
 			someVar = 1
 		}
-		fmt.Printf("\nMessage push to %v ", pushMessage)
-		pushMessage.Data["index"] = index
 
+		pushMessage.Data["index"] = index
 		GqueClient.PushMessage(pushMessage)
 		index += 1
 	}
 }
 
-func StartQueue1(GqueClient *Client) {
+func StartQueue1(GqueClient *GqueClient) {
 
 	queue1CreateResult, queue1CreateErr := GqueClient.CreateQueue(Queue1)
 	fmt.Printf("\n queue1CreateResult : %v \n queue1CreateErr: %v ", queue1CreateResult, queue1CreateErr)
@@ -82,7 +81,7 @@ func StartQueue1(GqueClient *Client) {
 
 }
 
-func StartQueue2(GqueClient *Client) {
+func StartQueue2(GqueClient *GqueClient) {
 	queue2CreateResult, queue2CreateErr := GqueClient.CreateQueue(Queue2)
 	fmt.Printf("\n queue2CreateResult : %v \n queue2CreateErr: %v ", queue2CreateResult, queue2CreateErr)
 
@@ -101,7 +100,7 @@ func StartQueue2(GqueClient *Client) {
 	}
 }
 
-func StartBroadcast(GqueClient *Client) {
+func StartBroadcast(GqueClient *GqueClient) {
 
 	broadcastCreateResult, broadcastCreateErr := GqueClient.CreateBroadcast(Broadcast1)
 	fmt.Printf("\n broadcastCreateResult : %v \n broadcastCreateErr: %v ", broadcastCreateResult, broadcastCreateErr)

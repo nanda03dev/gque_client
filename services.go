@@ -12,7 +12,7 @@ import (
 	pb "github.com/nanda03dev/gque_client/proto"
 )
 
-func (gqueClient *Client) CreateQueue(queue Queue) (*pb.SuccessResponse, error) {
+func (gqueClient *GqueClient) CreateQueue(queue Queue) (*pb.SuccessResponse, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
@@ -26,7 +26,7 @@ func (gqueClient *Client) CreateQueue(queue Queue) (*pb.SuccessResponse, error) 
 	return gRPC.CreateQueue(ctx, requestBody)
 }
 
-func (gqueClient *Client) CreateBroadcast(broadcast Broadcast) (*pb.SuccessResponse, error) {
+func (gqueClient *GqueClient) CreateBroadcast(broadcast Broadcast) (*pb.SuccessResponse, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
@@ -40,7 +40,7 @@ func (gqueClient *Client) CreateBroadcast(broadcast Broadcast) (*pb.SuccessRespo
 	return gRPC.CreateBroadcast(ctx, requestBody)
 }
 
-func (gqueClient *Client) PushMessage(queueMessage QueueMessageType) (*pb.SuccessResponse, error) {
+func (gqueClient *GqueClient) PushMessage(queueMessage QueueMessageType) (*pb.SuccessResponse, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
@@ -60,7 +60,7 @@ func (gqueClient *Client) PushMessage(queueMessage QueueMessageType) (*pb.Succes
 	return gRPC.PushMessage(ctx, requestBody)
 }
 
-func (gqueClient *Client) BroadcastMessage(broadcastMessage BroadcastMessageType) (*pb.SuccessResponse, error) {
+func (gqueClient *GqueClient) BroadcastMessage(broadcastMessage BroadcastMessageType) (*pb.SuccessResponse, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
@@ -80,7 +80,7 @@ func (gqueClient *Client) BroadcastMessage(broadcastMessage BroadcastMessageType
 	return gRPC.BroadcastMessage(ctx, requestBody)
 }
 
-func (gqueClient *Client) Consume(ConsumerRequest ConsumerRequestType, receiveChan chan MessageType) error {
+func (gqueClient *GqueClient) Consume(ConsumerRequest ConsumerRequestType, receiveChan chan MessageType) error {
 
 	ctx := context.WithoutCancel(context.Background())
 

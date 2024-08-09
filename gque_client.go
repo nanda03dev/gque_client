@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-type Client struct {
+type GqueClient struct {
 	URI        string // Ex: http://localhost:5456
 	AppName    string
 	GqueClient pb.GqueServiceClient
@@ -15,8 +15,8 @@ type Client struct {
 
 // Create new Gque client,
 // URI string  Ex: http://localhost:5454
-func Connect(URI string, appName string) *Client {
-	var client = &Client{
+func Connect(URI string, appName string) *GqueClient {
+	var client = &GqueClient{
 		URI: URI,
 	}
 
