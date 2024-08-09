@@ -1,4 +1,4 @@
-package gqueclient
+package gque_client
 
 import (
 	"fmt"
@@ -63,7 +63,7 @@ func TestGque(t *testing.T) {
 	}
 }
 
-func StartQueue1(GqueClient *GqueClient) {
+func StartQueue1(GqueClient *Client) {
 
 	queue1CreateResult, queue1CreateErr := GqueClient.CreateQueue(Queue1)
 	fmt.Printf("\n queue1CreateResult : %v \n queue1CreateErr: %v ", queue1CreateResult, queue1CreateErr)
@@ -81,7 +81,7 @@ func StartQueue1(GqueClient *GqueClient) {
 
 }
 
-func StartQueue2(GqueClient *GqueClient) {
+func StartQueue2(GqueClient *Client) {
 	queue2CreateResult, queue2CreateErr := GqueClient.CreateQueue(Queue2)
 	fmt.Printf("\n queue2CreateResult : %v \n queue2CreateErr: %v ", queue2CreateResult, queue2CreateErr)
 
@@ -100,7 +100,7 @@ func StartQueue2(GqueClient *GqueClient) {
 	}
 }
 
-func StartBroadcast(GqueClient *GqueClient) {
+func StartBroadcast(GqueClient *Client) {
 
 	broadcastCreateResult, broadcastCreateErr := GqueClient.CreateBroadcast(Broadcast1)
 	fmt.Printf("\n broadcastCreateResult : %v \n broadcastCreateErr: %v ", broadcastCreateResult, broadcastCreateErr)

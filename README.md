@@ -17,5 +17,5 @@ Gque is a Go-based queue message protocol that leverages the Gnosql in-memory da
 To install Gque, use the following command:
 
 ```bash
-go get -u github.com/nanda03dev/gque
+go get -u github.com/nanda03dev/gque_client
 ```

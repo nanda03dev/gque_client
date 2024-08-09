@@ -1,4 +1,4 @@
-package gqueclient
+package gque_client
 
 type Queue struct {
 	Name string `json:"name"`
