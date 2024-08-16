@@ -1,6 +1,6 @@
 # Gque Client - Golang Client for Gque
 
-gque_client is a Golang client library designed to interact with the Gque message queue protocol. This client provides an easy-to-use interface for connecting to Gque, creating broadcast channels and queues, pushing messages, broadcasting messages, and consuming messages.
+Gque Client is a Golang client library designed to interact with the Gque message queue protocol. This client provides an easy-to-use interface for connecting to Gque, creating broadcast channels and queues, pushing messages, broadcasting messages, and consuming messages.
 
 ## Features
 
